@@ -1,9 +1,11 @@
 import { styled } from "@mui/material";
 import { Icons, Logo } from "../../assets";
+import { useToggleModal } from "../../hooks/useToggleModal";
 
 const { Cart, Heart, User } = Icons;
 
 export const Header = () => {
+  const { toggleHandler } = useToggleModal();
   return (
     <StyledHeader>
       <div className="wrapper-logo_png">
@@ -15,7 +17,7 @@ export const Header = () => {
       </div>
       <nav>
         <ListNav>
-          <li>
+          <li onClick={() => toggleHandler("open")}>
             <Cart />
             <b className="price">1205 руб.</b>
           </li>
