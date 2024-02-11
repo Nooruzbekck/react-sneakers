@@ -1,6 +1,6 @@
 export { default as Logo } from "../../public/logo.png";
-export { default as Empty } from "../../public/img/empty-cart.webp";
-export { default as CompleteOrder } from "../../public/img/complete-order.webp";
+export { default as Empty } from "./img/empty-cart.webp";
+export { default as CompleteOrder } from "./img/complete-order.webp";
 
 import Plus from "./icons/btn-plus.svg?react";
 import Checked from "./icons/btn-checked.svg?react";

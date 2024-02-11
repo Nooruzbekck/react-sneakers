@@ -14,6 +14,7 @@ export const CardList = ({ items = [] }) => {
 const CardListContainer = styled("ul")`
   max-width: 100%;
   display: flex;
+  justify-content: space-between;
   flex-wrap: wrap;
   gap: 40px 18px;
   @media (max-width: 480px) {
