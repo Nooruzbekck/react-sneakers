@@ -80,18 +80,19 @@ export const CardItem = ({ id, imageUrl, price, title, isFavorite }) => {
 const StyledListItem = styled("li")`
   width: 230px;
   height: 280px;
-  border-radius: 40px;
+  border-radius: 1.5rem;
   border: 1.2px solid #f3f3f3;
   background: #fff;
   padding: 29px;
   list-style: none;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+  transition: transform 0.3s, box-shadow 0.3s;
+  &:hover {
+    transform: translateY(-2px) scale(1.01);
+    box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1);
+  }
   svg {
     cursor: pointer;
-  }
-  &:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   }
 
   @media (max-width: 480px) {

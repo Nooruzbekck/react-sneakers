@@ -20,7 +20,7 @@ export const CartItem = ({ id, imageUrl, title, price }) => {
 };
 
 const ListItem = styled("li")`
-  width: 100%;
+  width: 98%;
   height: 119px;
   border-radius: 20px;
   border: 1px solid #f3f3f3;
@@ -30,6 +30,12 @@ const ListItem = styled("li")`
   gap: 21px;
   padding: 20px;
   color: #000;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+  &:hover {
+    transform: translateY(-2px) scale(1.01);
+    box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1);
+  }
 
   img {
     width: 70px;

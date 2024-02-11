@@ -66,7 +66,7 @@ const StyledContainer = styled("div")`
   top: 0;
   background-color: white;
   z-index: 30;
-  padding: 32px 30px;
+  /* padding: 32px 30px; */
   border: unset;
 `;
 
@@ -74,4 +74,5 @@ const Basket = styled("h1")`
   color: #000;
   font-size: 24px;
   font-weight: 700;
+  padding: 32px 0 0 30px;
 `;
