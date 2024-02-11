@@ -82,8 +82,8 @@ export const CardItem = ({ id, imageUrl, price, title, isFavorite }) => {
 };
 
 const StyledListItem = styled("li")`
-  width: 230px;
-  height: 280px;
+  width: 210px;
+  height: 270px;
   border-radius: 1.5rem;
   border: 1.2px solid #f3f3f3;
   background: #fff;
