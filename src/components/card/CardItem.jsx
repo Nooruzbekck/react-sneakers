@@ -1,8 +1,34 @@
+import { useCallback, useContext } from "react";
 import { styled } from "@mui/material";
+import { cartContext } from "../../context/cart-context";
+import { toast } from "react-toastify";
 import { Icons } from "../../assets";
-const { Plus, UnLiked, Liked } = Icons;
+const { Plus, UnLiked, Liked, Checked } = Icons;
 
-export const CardItem = ({ imageUrl, price, title, isFavorite }) => {
+export const CardItem = ({ id, imageUrl, price, title, isFavorite }) => {
+  const { onAddToCart, sneakersCart = [] } = useContext(cartContext);
+
+  const isItemAdded = (addedId) => {
+    return sneakersCart.some((obj) => Number(obj.parentId) === Number(addedId));
+  };
+
+  const isAdded = isItemAdded(id);
+
+  const onClickPlus = useCallback(() => {
+    const obj = {
+      id,
+      parentId: id,
+      title,
+      imageUrl,
+      price,
+    };
+    onAddToCart(obj);
+    if (!isAdded) {
+      toast.success("Добавлено в корзину");
+    } else {
+      toast.success("Удалено из корзина");
+    }
+  }, [id, title, imageUrl, price, onAddToCart]);
   return (
     <StyledListItem>
       <ContainerImage>
@@ -19,7 +45,11 @@ export const CardItem = ({ imageUrl, price, title, isFavorite }) => {
           <span>Цена:</span>
           <b>{price} руб.</b>
         </div>
-        <Plus />
+        {isAdded ? (
+          <Checked onClick={onClickPlus} />
+        ) : (
+          <Plus onClick={onClickPlus} />
+        )}
       </ContainerPrice>
     </StyledListItem>
   );

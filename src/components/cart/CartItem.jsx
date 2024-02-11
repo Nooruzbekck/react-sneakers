@@ -1,7 +1,10 @@
+import { useContext } from "react";
 import { styled } from "@mui/material";
+import { cartContext } from "../../context/cart-context";
 import { Icons } from "../../assets";
 
-export const CartItem = ({ imageUrl, title, price }) => {
+export const CartItem = ({ id, imageUrl, title, price }) => {
+  const { onRemoveItem } = useContext(cartContext);
   return (
     <ListItem>
       <img src={imageUrl} alt="" />
@@ -9,7 +12,7 @@ export const CartItem = ({ imageUrl, title, price }) => {
         <p>{title}</p>
         <CartContainerPrice>
           <b>{price} руб.</b>
-          <Icons.Remove className="remove" />
+          <Icons.Remove className="remove" onClick={() => onRemoveItem(id)} />
         </CartContainerPrice>
       </WrapperPriceDesc>
     </ListItem>

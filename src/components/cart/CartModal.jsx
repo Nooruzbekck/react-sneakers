@@ -1,14 +1,17 @@
 import { Modal, styled } from "@mui/material";
 import { CartList } from "./CartList";
 import { useToggleModal } from "../../hooks/useToggleModal";
+import { useContext } from "react";
+import { cartContext } from "../../context/cart-context";
 
 export const CartModal = () => {
   const { cartIsActive, toggleHandler } = useToggleModal();
+  const { sneakersCart } = useContext(cartContext);
   return (
-    <Modal open={cartIsActive} onClose={() => toggleHandler("")}>
+    <Modal open={Boolean(cartIsActive)} onClose={() => toggleHandler("")}>
       <StyledContainer>
         <Basket>Корзина</Basket>
-        <CartList />
+        <CartList cartItems={sneakersCart} />
       </StyledContainer>
     </Modal>
   );
