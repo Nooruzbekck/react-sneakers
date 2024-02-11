@@ -1,14 +1,16 @@
 import { styled } from "@mui/material";
 import { Icons, Logo } from "../../assets";
 import { useToggleModal } from "../../hooks/useToggleModal";
+import { useNavigate } from "react-router-dom";
 
 const { Cart, Heart, User } = Icons;
 
 export const Header = () => {
   const { toggleHandler } = useToggleModal();
+  const navigate = useNavigate();
   return (
     <StyledHeader>
-      <div className="wrapper-logo_png">
+      <div className="wrapper-logo_png" onClick={() => navigate("/")}>
         <img src={Logo} alt="" />
         <div className="wrapper-description">
           <h1>REACT SNEAKERS</h1>
@@ -21,11 +23,11 @@ export const Header = () => {
             <Cart />
             <b className="price">1205 руб.</b>
           </li>
-          <li>
+          <li onClick={() => navigate("/favorites")}>
             <Heart />
             <b>Закладки</b>
           </li>
-          <li>
+          <li onClick={() => navigate("/orders")}>
             <User />
             <b>Профиль</b>
           </li>
