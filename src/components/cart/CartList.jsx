@@ -38,11 +38,13 @@ const ContainerCartList = styled("div")`
   overflow-y: scroll;
   display: flex;
   flex-direction: column;
+  gap: 10px;
   justify-content: space-between;
-  padding-bottom: 30px;
+  padding: 0px 30px 62px 30px;
   ul {
     display: flex;
     flex-direction: column;
+    align-items: center;
     gap: 20px;
     list-style: none;
     margin-top: 30px;
@@ -53,7 +55,8 @@ const CartTotalBlock = styled("div")`
   flex-direction: column;
   gap: 19px;
   width: 308px;
-  margin-top: 20px;
+  margin-bottom: 20px;
+
   & > div {
     display: flex;
     justify-content: space-between;

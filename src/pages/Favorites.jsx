@@ -1,16 +1,20 @@
 import React, { useContext } from "react";
 import { useNavigate } from "react-router-dom";
+import { styled } from "@mui/material";
 import { favoritesContext } from "../context/favorites-context";
 import { CardList } from "../components/card/CardList";
 import { Button } from "../components/UI/Button";
-import { styled } from "@mui/material";
+import { CiCircleChevLeft } from "react-icons/ci";
 
-export const FavoritePage = () => {
+export const Favorites = () => {
   const { favorites } = useContext(favoritesContext);
   const navigate = useNavigate();
   return (
     <ContainerFavorites>
-      <h1>Мои закладки</h1>
+      <div>
+        <CiCircleChevLeft className="chevleft" onClick={() => navigate("/")} />
+        <h1>Мои закладки</h1>
+      </div>
       {favorites.length > 0 ? (
         <CardList items={favorites} />
       ) : (
@@ -39,6 +43,16 @@ const ContainerFavorites = styled("div")`
   gap: 40px;
   padding: 40px 60px 25px 60px;
 
+  & > div {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    .chevleft {
+      width: 30px;
+      height: 30px;
+      cursor: pointer;
+    }
+  }
   @media (max-width: 480px) {
     gap: 30px;
     padding: 30px 40px 25px 40px;
