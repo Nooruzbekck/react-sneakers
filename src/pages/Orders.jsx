@@ -12,7 +12,7 @@ export const Orders = () => {
   const navigate = useNavigate();
   return (
     <ContainerFavorites>
-      <div>
+      <div className="container_title">
         <CiCircleChevLeft className="chevleft" onClick={() => navigate("/")} />
         <h1>Мои покупки</h1>
       </div>
@@ -50,7 +50,7 @@ const ContainerFavorites = styled("div")`
   flex-direction: column;
   gap: 40px;
   padding: 40px 60px 25px 60px;
-  & > div {
+  .container_title {
     display: flex;
     align-items: center;
     gap: 10px;
