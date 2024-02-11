@@ -1,12 +1,6 @@
-export { default as Logo } from "./img/logo.png";
-export { default as Slider } from "./img/slider.png";
-export { default as SliderBackground } from "./img/slider-background.png";
-export { default as Adidas } from "./img/adidas.png";
-export { default as Adidas2 } from "./img/image 7 (1).png";
-export { default as Empty } from "./img/empty-cart.jpg";
-export { default as CompleteOrder } from "./img/complete-order.jpg";
-export { default as LoginImage } from "./img/login.png";
-export { default as RegisterImage } from "./img/register.png";
+export { default as Logo } from "../../public/logo.png";
+export { default as Empty } from "../../public/img/empty-cart.webp";
+export { default as CompleteOrder } from "../../public/img/complete-order.webp";
 
 import Plus from "./icons/btn-plus.svg?react";
 import Checked from "./icons/btn-checked.svg?react";
