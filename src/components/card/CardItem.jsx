@@ -3,15 +3,20 @@ import { styled } from "@mui/material";
 import { cartContext } from "../../context/cart-context";
 import { toast } from "react-toastify";
 import { Icons } from "../../assets";
+import { favoritesContext } from "../../context/favorites-context";
 const { Plus, UnLiked, Liked, Checked } = Icons;
 
 export const CardItem = ({ id, imageUrl, price, title, isFavorite }) => {
   const { onAddToCart, sneakersCart = [] } = useContext(cartContext);
+  const { favorites, postFavoritesItems } = useContext(favoritesContext);
 
   const isItemAdded = (addedId) => {
     return sneakersCart.some((obj) => Number(obj.parentId) === Number(addedId));
   };
-
+  const isItemFavorite = (newId) => {
+    return favorites.some((obj) => obj.id === newId);
+  };
+  const isFavorites = isItemFavorite(id);
   const isAdded = isItemAdded(id);
 
   const onClickPlus = useCallback(() => {
@@ -26,16 +31,33 @@ export const CardItem = ({ id, imageUrl, price, title, isFavorite }) => {
     if (!isAdded) {
       toast.success("Добавлено в корзину");
     } else {
-      toast.success("Удалено из корзина");
+      toast.success("Удалено из корзины");
     }
   }, [id, title, imageUrl, price, onAddToCart]);
+
+  const onClickFavorite = useCallback(async () => {
+    const Favobj = {
+      id,
+      title,
+      imageUrl,
+      price,
+      isFavorite: !isItemFavorite(id),
+    };
+    postFavoritesItems(Favobj);
+    if (!isFavorites) {
+      toast.success("Добавлено в закладку");
+    } else {
+      toast.success("Удалено из закладки");
+    }
+  }, [id, title, imageUrl, price, isFavorite, postFavoritesItems]);
+
   return (
     <StyledListItem>
       <ContainerImage>
-        {isFavorite ? (
-          <Liked className="heart" />
+        {isFavorites ? (
+          <Liked className="heart" onClick={onClickFavorite} />
         ) : (
-          <UnLiked className="heart" />
+          <UnLiked className="heart" onClick={onClickFavorite} />
         )}
         <img src={imageUrl} alt={title} />
       </ContainerImage>
