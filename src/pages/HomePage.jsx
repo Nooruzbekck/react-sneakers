@@ -1,15 +1,17 @@
 import { styled } from "@mui/material";
+import { useGetRequest } from "../hooks/useGetRequest";
 import { CardList } from "../components/card/CardList";
 import { Input } from "../components/UI/Input";
 
 export const Home = () => {
+  const [items] = useGetRequest("items");
   return (
     <AllSneakers>
       <div className="input_title">
         <h1>Все кроссовки</h1>
         <Input type="search" placeholder="Поиск..." />
       </div>
-      <CardList />
+      <CardList items={items} />
     </AllSneakers>
   );
 };

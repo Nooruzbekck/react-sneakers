@@ -2,7 +2,7 @@ import { styled } from "@mui/material";
 import { Icons } from "../../assets";
 const { Plus, UnLiked, Liked } = Icons;
 
-export const CardItem = ({ imageUrl, price, title, isFavorite = false }) => {
+export const CardItem = ({ imageUrl, price, title, isFavorite }) => {
   return (
     <StyledListItem>
       <ContainerImage>
@@ -11,7 +11,6 @@ export const CardItem = ({ imageUrl, price, title, isFavorite = false }) => {
         ) : (
           <UnLiked className="heart" />
         )}
-
         <img src={imageUrl} alt={title} />
       </ContainerImage>
       <Description>{title}</Description>
@@ -27,8 +26,8 @@ export const CardItem = ({ imageUrl, price, title, isFavorite = false }) => {
 };
 
 const StyledListItem = styled("li")`
-  width: 210px;
-  height: 270px;
+  width: 230px;
+  height: 280px;
   border-radius: 40px;
   border: 1.2px solid #f3f3f3;
   background: #fff;
@@ -68,7 +67,7 @@ const ContainerImage = styled("div")`
   }
   img {
     width: 100%;
-    height: 102px;
+    height: 112px;
     object-fit: cover;
   }
 
@@ -131,9 +130,9 @@ const ContainerPrice = styled("div")`
       font-size: 9px;
       font-weight: 300;
     }
-  }
-  b {
-    font-size: 11px;
-    font-weight: 500;
+    b {
+      font-size: 11px;
+      font-weight: 500;
+    }
   }
 `;
