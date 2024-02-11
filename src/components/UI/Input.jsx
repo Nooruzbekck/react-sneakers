@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { InputAdornment, IconButton, TextField, styled } from "@mui/material";
 import { IoEyeSharp, IoEyeOffSharp } from "react-icons/io5";
-import { RiSearch2Line } from "react-icons/ri";
+import { Icons } from "../../assets";
 
 export const Input = ({ type, value, placeholder, onChange, ...props }) => {
   const [showPassword, setShowPassword] = useState(false);
@@ -57,14 +57,14 @@ export const Input = ({ type, value, placeholder, onChange, ...props }) => {
   );
 };
 
-const StyledInput = styled(TextField)(({ error, type }) => ({
+const StyledInput = styled(TextField)(({ error }) => ({
   width: "100%",
   maxWidth: "270px",
   height: "45px",
   border: `1px solid ${error ? "#F10000" : "#f3f3f3"}`,
   borderRadius: "10px",
   background: "white",
-  paddingLeft: "10px",
+  padding: "0 10px",
   display: "flex",
   justifyContent: "center",
   color: "#848181",
@@ -93,9 +93,7 @@ const StyledInput = styled(TextField)(({ error, type }) => ({
   },
 }));
 
-const StyledRiSearch2Line = styled(RiSearch2Line)(() => ({
-  width: "20px",
-  height: "20px",
+const StyledRiSearch2Line = styled(Icons.Search)(() => ({
   position: "absolute",
-  left: "0",
+  right: "-15px",
 }));

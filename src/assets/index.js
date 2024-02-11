@@ -10,6 +10,7 @@ export { default as RegisterImage } from "./img/register.png";
 
 import Plus from "./icons/btn-plus.svg?react";
 import Checked from "./icons/btn-checked.svg?react";
+import Search from "./icons/search.svg?react";
 import Remove from "./icons/btn-remove.svg?react";
 import Cart from "./icons/cart.svg?react";
 import Liked from "./icons/liked.svg?react";
@@ -32,4 +33,5 @@ export const Icons = {
   Arrow,
   ArrowLeft,
   ArrowBack,
+  Search,
 };
