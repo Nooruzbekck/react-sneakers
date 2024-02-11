@@ -2,7 +2,7 @@ import { styled } from "@mui/material";
 import { CartItem } from "./CartItem";
 import { Button } from "../UI/Button";
 
-export const CartList = ({ cartItems = [] }) => {
+export const CartList = ({ cartItems = [], onPostOrders }) => {
   return (
     <ContainerCartList>
       <ul>
@@ -25,7 +25,9 @@ export const CartList = ({ cartItems = [] }) => {
           </div>
           <b>2229 руб. </b>
         </div>
-        <Button variantIcon="right">Оформить заказ</Button>
+        <Button variantIcon="right" onClick={onPostOrders}>
+          Оформить заказ
+        </Button>
       </CartTotalBlock>
     </ContainerCartList>
   );

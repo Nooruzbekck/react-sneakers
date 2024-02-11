@@ -1,17 +1,30 @@
+import { useState } from "react";
 import { styled } from "@mui/material";
 import { useGetRequest } from "../hooks/useGetRequest";
 import { CardList } from "../components/card/CardList";
 import { Input } from "../components/UI/Input";
 
 export const Home = () => {
+  const [searchValue, setSearchValue] = useState("");
   const [items] = useGetRequest("items");
+  const onChangeSearchInput = (e) => {
+    setSearchValue(e.target.value);
+  };
+  const filtredItems = items.filter((item) =>
+    item.title.toLowerCase().includes(searchValue.toLowerCase())
+  );
   return (
     <AllSneakers>
       <div className="input_title">
         <h1>Все кроссовки</h1>
-        <Input type="search" placeholder="Поиск..." />
+        <Input
+          onChange={onChangeSearchInput}
+          value={searchValue}
+          type="search"
+          placeholder="Поиск..."
+        />
       </div>
-      <CardList items={items} />
+      <CardList items={filtredItems} />
     </AllSneakers>
   );
 };
