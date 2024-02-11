@@ -1,3 +1,4 @@
+import { useLocation } from "react-router-dom";
 import { useCallback, useContext } from "react";
 import { styled } from "@mui/material";
 import { cartContext } from "../../context/cart-context";
@@ -9,6 +10,7 @@ const { Plus, UnLiked, Liked, Checked } = Icons;
 export const CardItem = ({ id, imageUrl, price, title, isFavorite }) => {
   const { onAddToCart, sneakersCart = [] } = useContext(cartContext);
   const { favorites, postFavoritesItems } = useContext(favoritesContext);
+  const { pathname } = useLocation();
 
   const isItemAdded = (addedId) => {
     return sneakersCart.some((obj) => Number(obj.parentId) === Number(addedId));
@@ -54,7 +56,7 @@ export const CardItem = ({ id, imageUrl, price, title, isFavorite }) => {
   return (
     <StyledListItem>
       <ContainerImage>
-        {isFavorites ? (
+        {pathname === "/orders" ? null : isFavorites ? (
           <Liked className="heart" onClick={onClickFavorite} />
         ) : (
           <UnLiked className="heart" onClick={onClickFavorite} />
@@ -67,7 +69,9 @@ export const CardItem = ({ id, imageUrl, price, title, isFavorite }) => {
           <span>Цена:</span>
           <b>{price} руб.</b>
         </div>
-        {isAdded ? (
+        {pathname === "/orders" ? (
+          <Checked />
+        ) : isAdded ? (
           <Checked onClick={onClickPlus} />
         ) : (
           <Plus onClick={onClickPlus} />
