@@ -7,6 +7,7 @@ import { cartContext } from "../../context/cart-context";
 import { InfoOrders } from "./InfoOrders";
 import { CartEmpty } from "./CartEmpty";
 import { BASE_URL } from "../../utils/constants/constants";
+import { CiCircleChevLeft } from "react-icons/ci";
 
 export const CartModal = () => {
   const { cartIsActive, toggleHandler } = useToggleModal();
@@ -36,7 +37,13 @@ export const CartModal = () => {
   return (
     <Modal open={Boolean(cartIsActive)} onClose={() => toggleHandler("")}>
       <StyledContainer>
-        <Basket>Корзина</Basket>
+        <Basket>
+          <CiCircleChevLeft
+            className="chevleft"
+            onClick={() => toggleHandler("")}
+          />
+          <h1>Корзина</h1>
+        </Basket>
         {isOrders ? (
           <InfoOrders dataId={dataId} setIsOrders={setIsOrders} />
         ) : (
@@ -66,13 +73,23 @@ const StyledContainer = styled("div")`
   top: 0;
   background-color: white;
   z-index: 30;
-  /* padding: 32px 30px; */
+  padding-bottom: 60px;
   border: unset;
 `;
 
-const Basket = styled("h1")`
-  color: #000;
-  font-size: 24px;
-  font-weight: 700;
+const Basket = styled("div")`
+  display: flex;
+  align-items: center;
+  gap: 10px;
   padding: 32px 0 0 30px;
+  .chevleft {
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+  }
+  h1 {
+    color: #000;
+    font-size: 24px;
+    font-weight: 700;
+  }
 `;

@@ -1,8 +1,12 @@
 import { styled } from "@mui/material";
 import { CartItem } from "./CartItem";
 import { Button } from "../UI/Button";
+import { useContext } from "react";
+import { cartContext } from "../../context/cart-context";
 
 export const CartList = ({ cartItems = [], onPostOrders }) => {
+  const { totalPrice } = useContext(cartContext);
+  const totalAmount = (totalPrice / 100) * 5;
   return (
     <ContainerCartList>
       <ul>
@@ -16,14 +20,14 @@ export const CartList = ({ cartItems = [], onPostOrders }) => {
           <div>
             <div></div>
           </div>
-          <b>{2220} руб.</b>
+          <b>{totalPrice} руб.</b>
         </div>
         <div>
           <h3>Налог 5%:</h3>
           <div>
             <div></div>
           </div>
-          <b>2229 руб. </b>
+          <b>{totalAmount.toFixed(2)} руб. </b>
         </div>
         <Button variantIcon="right" onClick={onPostOrders}>
           Оформить заказ
@@ -40,7 +44,8 @@ const ContainerCartList = styled("div")`
   flex-direction: column;
   gap: 10px;
   justify-content: space-between;
-  padding: 0px 30px 62px 30px;
+  align-items: center;
+  padding: 0px 30px 32px 30px;
   ul {
     display: flex;
     flex-direction: column;
