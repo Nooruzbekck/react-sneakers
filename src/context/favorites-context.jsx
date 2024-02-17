@@ -1,7 +1,6 @@
 import { createContext, useEffect, useState } from "react";
 import { useGetRequest } from "../hooks/useGetRequest";
-import axios from "axios";
-import { BASE_URL } from "../utils/constants/constants";
+import { axiosInstance } from "../api/axiosInstance";
 
 export const favoritesContext = createContext({});
 
@@ -15,7 +14,7 @@ export const FavoriteProvider = ({ children }) => {
 
   const postFavoritesItems = async (obj) => {
     try {
-      await axios.patch(`${BASE_URL}/items/${obj.id}`, obj);
+      await axiosInstance.patch(`/items/${obj.id}`, obj);
       getSneakersItems();
     } catch (error) {
       console.log(error);

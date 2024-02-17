@@ -6,8 +6,6 @@ import { useFormik } from "formik";
 import { schema } from "../../utils/constants/validation";
 import { Input } from "../UI/Input";
 
-const { Remove } = Icons;
-
 export const SignUp = () => {
   const navigate = useNavigate();
 
@@ -29,7 +27,7 @@ export const SignUp = () => {
     <StyledRegisterContainer>
       <div>
         <h1>Регистрация</h1>
-        <Remove onClick={() => navigate("/login")} />
+        <Icons.Remove onClick={() => navigate("/login")} />
       </div>
       <Form onSubmit={handleSubmit}>
         <AuthInput
