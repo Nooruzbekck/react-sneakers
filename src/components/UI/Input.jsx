@@ -59,7 +59,6 @@ export const Input = ({ type, value, placeholder, onChange, ...props }) => {
 
 const StyledInput = styled(TextField)(({ error }) => ({
   width: "100%",
-  maxWidth: "270px",
   height: "45px",
   border: `1px solid ${error ? "#F10000" : "#f3f3f3"}`,
   borderRadius: "10px",

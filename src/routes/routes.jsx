@@ -3,6 +3,9 @@ import { App } from "../App";
 import { Home } from "../pages/Home";
 import { Favorites } from "../pages/Favorites";
 import { Orders } from "../pages/Orders";
+import { AuthLayout } from "../layout/AuthLayout";
+import { LoginPage } from "../pages/LoginPage";
+import { RegisterPage } from "../pages/RegisterPage";
 
 export const routes = createBrowserRouter([
   {
@@ -22,5 +25,14 @@ export const routes = createBrowserRouter([
         element: <Orders />,
       },
     ],
+  },
+
+  {
+    path: "login",
+    element: <LoginPage />,
+  },
+  {
+    path: "register",
+    element: <RegisterPage />,
   },
 ]);
