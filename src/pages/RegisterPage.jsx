@@ -1,10 +1,10 @@
 import { styled } from "@mui/material";
-import { Register } from "../components/auth/Register";
+import { SignUp } from "../components/auth/SignUp";
 
 export const RegisterPage = () => {
   return (
     <RegisterContainer>
-      <Register />
+      <SignUp />
     </RegisterContainer>
   );
 };
