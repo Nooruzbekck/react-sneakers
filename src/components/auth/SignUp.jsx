@@ -1,13 +1,16 @@
+import { useContext } from "react";
+import { useFormik } from "formik";
 import { styled } from "@mui/material";
+import { Link, useNavigate } from "react-router-dom";
+import { authContext } from "../../context/auth-context";
 import { AuthInput } from "./AuthInput";
 import { Icons } from "../../assets";
-import { Link, useNavigate } from "react-router-dom";
-import { useFormik } from "formik";
 import { schema } from "../../utils/constants/validation";
-import { Input } from "../UI/Input";
 
 export const SignUp = () => {
   const navigate = useNavigate();
+
+  const { postUserRequest } = useContext(authContext);
 
   const formik = useFormik({
     initialValues: {
@@ -17,11 +20,14 @@ export const SignUp = () => {
       password: "",
       confirmPassword: "",
     },
+
     validationSchema: schema,
+
     onSubmit: (userData) => {
-      console.log(userData);
+      postUserRequest(userData);
     },
   });
+
   const { handleSubmit, values, handleChange, errors, touched } = formik;
   return (
     <StyledRegisterContainer>
@@ -132,16 +138,6 @@ const Form = styled("form")`
     text-align: center;
     color: #fff;
     cursor: pointer;
-  }
-`;
-
-const StyledInput = styled(Input)`
-  .MuiFormControl-root {
-    height: 20px;
-  }
-  .MuiInputBase-input {
-    padding-top: 5px;
-    height: 30px;
   }
 `;
 
