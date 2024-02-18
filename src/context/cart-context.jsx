@@ -1,7 +1,6 @@
 import { createContext, useEffect, useState } from "react";
-import axios from "axios";
-import { BASE_URL } from "../utils/constants/constants";
 import { useGetRequest } from "../hooks/useGetRequest";
+import { axiosInstance } from "../api/axiosInstance";
 
 export const cartContext = createContext({});
 
@@ -26,10 +25,10 @@ export const CartProvider = ({ children }) => {
         setSneakersCart((prev) =>
           prev.filter((item) => Number(item.parentId) !== Number(obj.id))
         );
-        await axios.delete(`${BASE_URL}/cart/${findItem.id}`);
+        await axiosInstance.delete(`/cart/${findItem.id}`);
       } else {
         setSneakersCart((prev) => [...prev, obj]);
-        const { data } = await axios.post(`${BASE_URL}/cart`, obj);
+        const { data } = await axiosInstance.post(`/cart`, obj);
         setSneakersCart((prev) =>
           prev.map((item) => {
             if (item.parentId === data.parentId) {
@@ -50,7 +49,7 @@ export const CartProvider = ({ children }) => {
 
   const onRemoveItem = async (id) => {
     try {
-      await axios.delete(`${BASE_URL}/cart/${id}`);
+      await axiosInstance.delete(`/cart/${id}`);
       setSneakersCart((prev) => prev.filter((item) => item.id !== id));
     } catch (error) {
       console.log(error);
