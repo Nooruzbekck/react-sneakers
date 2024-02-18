@@ -1,14 +1,14 @@
 import { useContext } from "react";
 import { useFormik } from "formik";
 import { styled } from "@mui/material";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { authContext } from "../../context/auth-context";
 import { AuthInput } from "./AuthInput";
 import { schema } from "../../utils/constants/validation";
 
 export const SignUp = () => {
   const { postUserRequest } = useContext(authContext);
-
+  const navigate = useNavigate();
   const formik = useFormik({
     initialValues: {
       name: "",
@@ -20,8 +20,13 @@ export const SignUp = () => {
 
     validationSchema: schema,
 
-    onSubmit: (userData) => {
-      postUserRequest(userData);
+    onSubmit: async (userData) => {
+      await postUserRequest({
+        name: userData.name,
+        fullName: userData.fullName,
+        email: userData.email,
+      });
+      navigate("/");
     },
   });
 

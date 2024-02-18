@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { styled } from "@mui/material";
 import { useFormik } from "formik";
 import { AuthInput } from "./AuthInput";
@@ -8,6 +8,7 @@ import { authContext } from "../../context/auth-context";
 
 export const SignIn = () => {
   const { postLoginUserRequest } = useContext(authContext);
+  const navigate = useNavigate();
 
   const formik = useFormik({
     initialValues: {
@@ -16,8 +17,9 @@ export const SignIn = () => {
     },
 
     validationSchema: loginValidation,
-    onSubmit: (data) => {
-      postLoginUserRequest(data);
+    onSubmit: async (data) => {
+      await postLoginUserRequest(data);
+      navigate("/");
     },
   });
 
