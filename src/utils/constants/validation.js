@@ -2,7 +2,8 @@ import * as Yup from "yup";
 
 const EMAIL_REGX =
   /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
-const isPasswordValidator = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{5,}$/;
+
+const passwordRules = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{5,}$/;
 
 export const schema = Yup.object().shape({
   name: Yup.string()
@@ -20,9 +21,32 @@ export const schema = Yup.object().shape({
       message: "почта некорректен",
     })
     .required("Обязательное поле"),
-  password: Yup.string().required("Обязательное поле"),
+  password: Yup.string()
+    .matches(passwordRules, {
+      message: "Пожалуйста, создайте более надежный пароль",
+    })
+    .required("Обязательное поле"),
   confirmPassword: Yup.string().oneOf(
     [Yup.ref("password"), null],
-    "Пароль не совпадают"
+    "Пароли должны совпадать"
   ),
+  password: Yup.string()
+    .matches(/[0-9]/, "Пожалуйста, создайте более надежный пароль")
+    .matches(/[a-z]/, "Пожалуйста, создайте более надежный пароль")
+    .required("Обязательное поле"),
+  confirmPassword: Yup.string().oneOf(
+    [Yup.ref("password"), null],
+    "Пароли должны совпадать"
+  ),
+});
+
+export const loginValidation = Yup.object().shape({
+  email: Yup.string()
+    .email("Пожалуйста, введите действительный адрес электронной почты")
+    .matches(EMAIL_REGX, {
+      message: "почта некорректен",
+    }),
+  password: Yup.string()
+    .matches(/[0-9]/, "Пароль должен быть надежным")
+    .matches(/[a-z]/, "Пароль должен быть надежным"),
 });

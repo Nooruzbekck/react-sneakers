@@ -92,4 +92,8 @@ const ErrorMessage = styled("span")`
   position: absolute;
   bottom: -17px;
   left: 5px;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 `;

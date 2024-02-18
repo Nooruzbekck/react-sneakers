@@ -1,15 +1,12 @@
 import { useContext } from "react";
 import { useFormik } from "formik";
 import { styled } from "@mui/material";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { authContext } from "../../context/auth-context";
 import { AuthInput } from "./AuthInput";
-import { Icons } from "../../assets";
 import { schema } from "../../utils/constants/validation";
 
 export const SignUp = () => {
-  const navigate = useNavigate();
-
   const { postUserRequest } = useContext(authContext);
 
   const formik = useFormik({
@@ -28,12 +25,11 @@ export const SignUp = () => {
     },
   });
 
-  const { handleSubmit, values, handleChange, errors, touched } = formik;
+  const { handleSubmit, handleChange, values, errors, touched } = formik;
   return (
     <StyledRegisterContainer>
       <div>
         <h1>Регистрация</h1>
-        <Icons.Remove onClick={() => navigate("/login")} />
       </div>
       <Form onSubmit={handleSubmit}>
         <AuthInput
@@ -109,15 +105,11 @@ const StyledRegisterContainer = styled("div")`
   div {
     width: 100%;
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
     h1 {
       font-size: 28px;
       font-weight: 400;
-    }
-    svg {
-      border: none;
-      cursor: pointer;
     }
   }
 `;
