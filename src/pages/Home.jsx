@@ -1,18 +1,27 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { styled } from "@mui/material";
-import { useGetRequest } from "../hooks/useGetRequest";
 import { CardList } from "../components/card/CardList";
 import { Input } from "../components/UI/Input";
+import { getCardItemsThunk } from "../store/thunks/itemsThunks";
 
 export const Home = () => {
   const [searchValue, setSearchValue] = useState("");
-  const [items] = useGetRequest("items");
+
+  const dispatch = useDispatch();
+  const { items } = useSelector((state) => state.items);
+
+  useEffect(() => {
+    dispatch(getCardItemsThunk());
+  }, []);
+
   const onChangeSearchInput = (e) => {
     setSearchValue(e.target.value);
   };
   const filtredItems = items.filter((item) =>
     item.title.toLowerCase().includes(searchValue.toLowerCase())
   );
+
   return (
     <AllSneakers>
       <div className="input_title">
