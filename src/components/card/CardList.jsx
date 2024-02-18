@@ -1,11 +1,34 @@
 import { styled } from "@mui/material";
 import { CardItem } from "./CardItem";
+import { useDispatch, useSelector } from "react-redux";
+import { addToCartThunk, deleteCartThunk } from "../../store/thunks/cartThunks";
 
 export const CardList = ({ items = [] }) => {
+  const { cartItems } = useSelector((state) => state.cart);
+  const dispatch = useDispatch();
+
+  const isItemAdded = (addedId) => {
+    return cartItems.some((obj) => obj.parentId === addedId);
+  };
+
+  const plusClickHandler = (data) => {
+    const currentFind = cartItems.find((item) => item.parentId === data.id);
+    if (!currentFind) {
+      dispatch(addToCartThunk(data));
+    } else {
+      dispatch(deleteCartThunk(currentFind.id));
+    }
+  };
+
   return (
     <CardListContainer>
       {items.map((item) => (
-        <CardItem key={item.id} {...item} />
+        <CardItem
+          key={item.id}
+          {...item}
+          isItemAdded={isItemAdded}
+          onPlusClickHandler={plusClickHandler}
+        />
       ))}
     </CardListContainer>
   );

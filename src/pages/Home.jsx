@@ -4,6 +4,7 @@ import { styled } from "@mui/material";
 import { CardList } from "../components/card/CardList";
 import { Input } from "../components/UI/Input";
 import { getCardItemsThunk } from "../store/thunks/itemsThunks";
+import { getCartItemsThunk } from "../store/thunks/cartThunks";
 
 export const Home = () => {
   const [searchValue, setSearchValue] = useState("");
@@ -13,7 +14,8 @@ export const Home = () => {
 
   useEffect(() => {
     dispatch(getCardItemsThunk());
-  }, []);
+    dispatch(getCartItemsThunk());
+  }, [getCartItemsThunk, getCardItemsThunk]);
 
   const onChangeSearchInput = (e) => {
     setSearchValue(e.target.value);

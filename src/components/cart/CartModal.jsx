@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Modal, styled } from "@mui/material";
 import axios from "axios";
 import { CartList } from "./CartList";
@@ -8,18 +8,26 @@ import { InfoOrders } from "./InfoOrders";
 import { CartEmpty } from "./CartEmpty";
 import { BASE_URL } from "../../utils/constants/constants";
 import { CiCircleChevLeft } from "react-icons/ci";
+import { useDispatch, useSelector } from "react-redux";
+import { getCartItemsThunk } from "../../store/thunks/cartThunks";
 
 export const CartModal = () => {
   const { cartIsActive, toggleHandler } = useToggleModal();
   const [isOrders, setIsOrders] = useState(false);
   const [dataId, setDataId] = useState(0);
-  const { sneakersCart, setSneakersCart } = useContext(cartContext);
+
+  const { setSneakersCart } = useContext(cartContext);
+  const { cartItems } = useSelector((state) => state.cart);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getCartItemsThunk());
+  }, []);
 
   const handlePostOrders = async () => {
     try {
       const { data } = await axios.post(`${BASE_URL}/orders`, {
         date: new Date(),
-        items: sneakersCart,
+        items: cartItems,
       });
       setDataId(data.id);
       const items = data.items;
@@ -48,10 +56,10 @@ export const CartModal = () => {
           <InfoOrders dataId={dataId} setIsOrders={setIsOrders} />
         ) : (
           <>
-            {sneakersCart.length > 0 ? (
+            {cartItems.length > 0 ? (
               <>
                 <CartList
-                  cartItems={sneakersCart}
+                  cartItems={cartItems}
                   onPostOrders={handlePostOrders}
                 />
               </>
