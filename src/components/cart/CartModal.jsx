@@ -8,7 +8,7 @@ import { CartEmpty } from "./CartEmpty";
 import { BASE_URL } from "../../utils/constants/constants";
 import { CiCircleChevLeft } from "react-icons/ci";
 import { useDispatch, useSelector } from "react-redux";
-import { getCartItemsThunk } from "../../store/thunks/cartThunks";
+import { getCartItemsThunk } from "../../store/thunks/cartThunk";
 
 export const CartModal = () => {
   const { cartIsActive, toggleHandler } = useToggleModal();
@@ -27,8 +27,10 @@ export const CartModal = () => {
         date: new Date(),
         items: cartItems,
       });
+
       setDataId(data.id);
       const items = data.items;
+
       for (const iterator of items) {
         const itemId = iterator;
         await axios.delete(`${BASE_URL}/cart/${itemId.id}`);

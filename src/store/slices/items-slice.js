@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { getCardItemsThunk } from "../thunks/itemsThunks";
+import { getCardItemsThunk } from "../thunks/itemsThunk";
 
 export const itemsSlice = createSlice({
   name: "cardItems",

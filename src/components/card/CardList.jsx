@@ -1,7 +1,7 @@
 import { styled } from "@mui/material";
 import { CardItem } from "./CardItem";
 import { useDispatch, useSelector } from "react-redux";
-import { addToCartThunk, deleteCartThunk } from "../../store/thunks/cartThunks";
+import { addToCartThunk, deleteCartThunk } from "../../store/thunks/cartThunk";
 import {
   postFavoriteThunk,
   removeFavoriteThunk,

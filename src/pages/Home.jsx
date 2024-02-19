@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { styled } from "@mui/material";
 import { CardList } from "../components/card/CardList";
 import { Input } from "../components/UI/Input";
-import { getCardItemsThunk } from "../store/thunks/itemsThunks";
+import { getCardItemsThunk } from "../store/thunks/itemsThunk";
 import { getFavoritesThunk } from "../store/thunks/favoriteThunk";
 
 export const Home = () => {

@@ -1,6 +1,6 @@
 import { styled } from "@mui/material";
 import { Icons } from "../../assets";
-import { deleteCartThunk } from "../../store/thunks/cartThunks";
+import { deleteCartThunk } from "../../store/thunks/cartThunk";
 import { useDispatch } from "react-redux";
 
 export const CartItem = ({ id, imageUrl, title, price }) => {
