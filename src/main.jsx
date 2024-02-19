@@ -8,11 +8,9 @@ import { Provider } from "react-redux";
 import { store } from "./store";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
-  <React.StrictMode>
-    <AuthProvider>
-      <Provider store={store}>
-        <RouterProvider router={routes} />
-      </Provider>
-    </AuthProvider>
-  </React.StrictMode>
+  <AuthProvider>
+    <Provider store={store}>
+      <RouterProvider router={routes} />
+    </Provider>
+  </AuthProvider>
 );

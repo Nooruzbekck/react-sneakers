@@ -9,12 +9,17 @@ import { getFavoritesThunk } from "../store/thunks/favoriteThunk";
 
 export const Favorites = () => {
   const { favorites } = useSelector((state) => state.favorites);
+
   const dispatch = useDispatch();
-  console.log(favorites);
   const navigate = useNavigate();
   useEffect(() => {
     dispatch(getFavoritesThunk());
   }, [dispatch]);
+
+  const transformedData = favorites.reduce((acc, item) => {
+    return [...acc, { ...item, id: item.parentId }];
+  }, []);
+
   return (
     <ContainerFavorites>
       <div>
@@ -22,7 +27,7 @@ export const Favorites = () => {
         <h1>Мои закладки</h1>
       </div>
       {favorites.length > 0 ? (
-        <CardList items={favorites} />
+        <CardList items={transformedData} />
       ) : (
         <FavoritesEmpty>
           <img
@@ -43,7 +48,8 @@ export const Favorites = () => {
 };
 
 const ContainerFavorites = styled("div")`
-  height: 100vh;
+  height: 100%;
+  min-height: 80vh;
   display: flex;
   flex-direction: column;
   gap: 40px;

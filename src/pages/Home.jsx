@@ -4,22 +4,22 @@ import { styled } from "@mui/material";
 import { CardList } from "../components/card/CardList";
 import { Input } from "../components/UI/Input";
 import { getCardItemsThunk } from "../store/thunks/itemsThunks";
-import { getCartItemsThunk } from "../store/thunks/cartThunks";
+import { getFavoritesThunk } from "../store/thunks/favoriteThunk";
 
 export const Home = () => {
   const [searchValue, setSearchValue] = useState("");
-
   const dispatch = useDispatch();
   const { items } = useSelector((state) => state.items);
 
   useEffect(() => {
     dispatch(getCardItemsThunk());
-    dispatch(getCartItemsThunk());
-  }, [getCartItemsThunk, getCardItemsThunk]);
+    dispatch(getFavoritesThunk());
+  }, [dispatch]);
 
   const onChangeSearchInput = (e) => {
     setSearchValue(e.target.value);
   };
+
   const filtredItems = items.filter((item) =>
     item.title.toLowerCase().includes(searchValue.toLowerCase())
   );
@@ -41,6 +41,8 @@ export const Home = () => {
 };
 
 const AllSneakers = styled("div")`
+  height: 100%;
+  min-height: 80vh;
   display: flex;
   flex-direction: column;
   gap: 40px;

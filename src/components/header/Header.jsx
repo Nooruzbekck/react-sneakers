@@ -2,12 +2,14 @@ import { useNavigate } from "react-router-dom";
 import { styled } from "@mui/material";
 import { useToggleModal } from "../../hooks/useToggleModal";
 import { Icons, Logo } from "../../assets";
+import { useSelector } from "react-redux";
 
 const { Cart, Heart, User } = Icons;
 
 export const Header = () => {
   const { toggleHandler } = useToggleModal();
   const navigate = useNavigate();
+  const { totalPrice } = useSelector((state) => state.cart);
   return (
     <StyledHeader>
       <div className="wrapper-logo_png" onClick={() => navigate("/")}>
@@ -21,7 +23,7 @@ export const Header = () => {
         <ListNav>
           <li onClick={() => toggleHandler("open")}>
             <Cart />
-            <b className="price">{2000} руб.</b>
+            <b className="price">{totalPrice} руб.</b>
           </li>
           <li onClick={() => navigate("/favorites")}>
             <Heart />

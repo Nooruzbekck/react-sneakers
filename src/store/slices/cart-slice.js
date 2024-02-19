@@ -16,6 +16,9 @@ export const cartSlice = createSlice({
       .addCase(getCartItemsThunk.fulfilled, (state, action) => {
         state.loading = "успешно!";
         state.cartItems = action.payload;
+        state.totalPrice = state.cartItems.reduce((acc, item) => {
+          return (acc += item.price);
+        }, 0);
       })
       .addCase(getCartItemsThunk.rejected, (state, action) => {
         state.loading = "отклонено!";
