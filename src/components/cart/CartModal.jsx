@@ -1,6 +1,5 @@
 import { useContext, useEffect, useState } from "react";
 import { Modal, styled } from "@mui/material";
-import axios from "axios";
 import { CartList } from "./CartList";
 import { useToggleModal } from "../../hooks/useToggleModal";
 import { InfoOrders } from "./InfoOrders";
@@ -9,6 +8,7 @@ import { BASE_URL } from "../../utils/constants/constants";
 import { CiCircleChevLeft } from "react-icons/ci";
 import { useDispatch, useSelector } from "react-redux";
 import { getCartItemsThunk } from "../../store/thunks/cartThunk";
+import { postOrderThunk } from "../../store/thunks/orderThunk";
 
 export const CartModal = () => {
   const { cartIsActive, toggleHandler } = useToggleModal();
@@ -17,28 +17,19 @@ export const CartModal = () => {
 
   const { cartItems } = useSelector((state) => state.cart);
   const dispatch = useDispatch();
+
   useEffect(() => {
     dispatch(getCartItemsThunk());
   }, []);
 
   const handlePostOrders = async () => {
-    try {
-      const { data } = await axios.post(`${BASE_URL}/orders`, {
-        date: new Date(),
-        items: cartItems,
-      });
+    const newOrders = {
+      date: new Date(),
+      items: cartItems,
+    };
 
-      setDataId(data.id);
-      const items = data.items;
-
-      for (const iterator of items) {
-        const itemId = iterator;
-        await axios.delete(`${BASE_URL}/cart/${itemId.id}`);
-      }
-      setIsOrders(true);
-    } catch (error) {
-      console.log(error);
-    }
+    dispatch(postOrderThunk({ newOrders, setDataId }));
+    setIsOrders(true);
   };
 
   return (
