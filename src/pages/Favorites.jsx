@@ -1,14 +1,20 @@
-import React, { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { styled } from "@mui/material";
-import { favoritesContext } from "../context/favorites-context";
 import { CardList } from "../components/card/CardList";
 import { Button } from "../components/UI/Button";
 import { CiCircleChevLeft } from "react-icons/ci";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
+import { getFavoritesThunk } from "../store/thunks/favoriteThunk";
 
 export const Favorites = () => {
-  const { favorites } = useContext(favoritesContext);
+  const { favorites } = useSelector((state) => state.favorites);
+  const dispatch = useDispatch();
+  console.log(favorites);
   const navigate = useNavigate();
+  useEffect(() => {
+    dispatch(getFavoritesThunk());
+  }, [dispatch]);
   return (
     <ContainerFavorites>
       <div>

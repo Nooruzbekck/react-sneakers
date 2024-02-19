@@ -1,14 +1,11 @@
-import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { styled } from "@mui/material";
 import { useToggleModal } from "../../hooks/useToggleModal";
-import { cartContext } from "../../context/cart-context";
 import { Icons, Logo } from "../../assets";
 
 const { Cart, Heart, User } = Icons;
 
 export const Header = () => {
-  const { totalPrice } = useContext(cartContext);
   const { toggleHandler } = useToggleModal();
   const navigate = useNavigate();
   return (
@@ -24,7 +21,7 @@ export const Header = () => {
         <ListNav>
           <li onClick={() => toggleHandler("open")}>
             <Cart />
-            <b className="price">{totalPrice} руб.</b>
+            <b className="price">{2000} руб.</b>
           </li>
           <li onClick={() => navigate("/favorites")}>
             <Heart />

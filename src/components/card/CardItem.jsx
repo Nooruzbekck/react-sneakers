@@ -1,10 +1,6 @@
-import React, { useCallback, useContext } from "react";
-import { useSelector } from "react-redux";
 import { useLocation } from "react-router-dom";
-import { toast } from "react-toastify";
 import { styled } from "@mui/material";
 import { Icons } from "../../assets";
-import { favoritesContext } from "../../context/favorites-context";
 
 const { Plus, UnLiked, Liked, Checked } = Icons;
 
@@ -13,21 +9,12 @@ export const CardItem = ({
   imageUrl,
   price,
   title,
-  isFavorite,
   isItemAdded,
+  onLikedHandler,
+  isItemFavorite,
   onPlusClickHandler,
 }) => {
-  const { favorites, postFavoritesItems } = useContext(favoritesContext);
   const { pathname } = useLocation();
-
-  const isItemFavorite = useCallback(
-    (newId) => {
-      return favorites.some((obj) => obj.id === newId);
-    },
-    [favorites]
-  );
-
-  const isFavorites = isItemFavorite(id);
 
   const plusHandler = () => {
     onPlusClickHandler({
@@ -35,41 +22,24 @@ export const CardItem = ({
       imageUrl,
       price,
       title,
-      isFavorite,
       parentId: id,
     });
   };
 
-  const onClickFavorite = useCallback(async () => {
-    const Favobj = {
+  const onClickFavorite = () => {
+    onLikedHandler({
       id,
-      title,
       imageUrl,
       price,
-      isFavorite: !isItemFavorite(id),
-    };
-
-    postFavoritesItems(Favobj);
-    if (!isFavorites) {
-      toast.success("Добавлено в закладку");
-    } else {
-      toast.success("Удалено из закладки");
-    }
-  }, [
-    id,
-    title,
-    imageUrl,
-    price,
-    isFavorite,
-    postFavoritesItems,
-    isItemFavorite,
-    isFavorites,
-  ]);
+      title,
+      parentId: id,
+    });
+  };
 
   return (
     <StyledListItem>
       <ContainerImage>
-        {pathname === "/orders" ? null : isFavorites ? (
+        {pathname === "/orders" ? null : isItemFavorite(id) ? (
           <Liked className="heart" onClick={onClickFavorite} />
         ) : (
           <UnLiked className="heart" onClick={onClickFavorite} />

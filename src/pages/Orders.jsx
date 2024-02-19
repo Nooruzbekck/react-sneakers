@@ -2,13 +2,12 @@ import { useNavigate } from "react-router-dom";
 import { styled } from "@mui/material";
 import { CardList } from "../components/card/CardList";
 import { OrdersDate } from "../components/orders/OrdersDate";
-import { useGetRequest } from "../hooks/useGetRequest";
 import { CiCircleChevLeft } from "react-icons/ci";
 
 import { Button } from "../components/UI/Button";
 
 export const Orders = () => {
-  const [orders] = useGetRequest("orders");
+  // const [orders] = useGetRequest("orders");
   const navigate = useNavigate();
   return (
     <ContainerFavorites>
@@ -16,9 +15,9 @@ export const Orders = () => {
         <CiCircleChevLeft className="chevleft" onClick={() => navigate("/")} />
         <h1>Мои покупки</h1>
       </div>
-      {orders.length > 0 ? (
+      {[].length > 0 ? (
         <>
-          {orders.map((item) => (
+          {[].map((item) => (
             <ListContainer key={item.id}>
               <OrdersDate date={item.date} />
               <CardList items={item.items} />

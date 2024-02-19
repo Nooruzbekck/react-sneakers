@@ -3,7 +3,6 @@ import { Modal, styled } from "@mui/material";
 import axios from "axios";
 import { CartList } from "./CartList";
 import { useToggleModal } from "../../hooks/useToggleModal";
-import { cartContext } from "../../context/cart-context";
 import { InfoOrders } from "./InfoOrders";
 import { CartEmpty } from "./CartEmpty";
 import { BASE_URL } from "../../utils/constants/constants";
@@ -16,7 +15,6 @@ export const CartModal = () => {
   const [isOrders, setIsOrders] = useState(false);
   const [dataId, setDataId] = useState(0);
 
-  const { setSneakersCart } = useContext(cartContext);
   const { cartItems } = useSelector((state) => state.cart);
   const dispatch = useDispatch();
   useEffect(() => {
@@ -35,7 +33,6 @@ export const CartModal = () => {
         const itemId = iterator;
         await axios.delete(`${BASE_URL}/cart/${itemId.id}`);
       }
-      setSneakersCart([]);
       setIsOrders(true);
     } catch (error) {
       console.log(error);
