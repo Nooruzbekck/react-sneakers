@@ -1,62 +1,45 @@
 import { useLocation } from "react-router-dom";
-import { useCallback, useContext } from "react";
 import { styled } from "@mui/material";
-import { cartContext } from "../../context/cart-context";
-import { toast } from "react-toastify";
 import { Icons } from "../../assets";
-import { favoritesContext } from "../../context/favorites-context";
+
 const { Plus, UnLiked, Liked, Checked } = Icons;
 
-export const CardItem = ({ id, imageUrl, price, title, isFavorite }) => {
-  const { onAddToCart, sneakersCart = [] } = useContext(cartContext);
-  const { favorites, postFavoritesItems } = useContext(favoritesContext);
+export const CardItem = ({
+  id,
+  imageUrl,
+  price,
+  title,
+  isItemAdded,
+  onLikedHandler,
+  isItemFavorite,
+  onPlusClickHandler,
+}) => {
   const { pathname } = useLocation();
 
-  const isItemAdded = (addedId) => {
-    return sneakersCart.some((obj) => Number(obj.parentId) === Number(addedId));
-  };
-  const isItemFavorite = (newId) => {
-    return favorites.some((obj) => obj.id === newId);
-  };
-  const isFavorites = isItemFavorite(id);
-  const isAdded = isItemAdded(id);
-
-  const onClickPlus = useCallback(() => {
-    const obj = {
+  const plusHandler = () => {
+    onPlusClickHandler({
       id,
+      imageUrl,
+      price,
+      title,
       parentId: id,
-      title,
-      imageUrl,
-      price,
-    };
-    onAddToCart(obj);
-    if (!isAdded) {
-      toast.success("Добавлено в корзину");
-    } else {
-      toast.success("Удалено из корзины");
-    }
-  }, [id, title, imageUrl, price, onAddToCart]);
+    });
+  };
 
-  const onClickFavorite = useCallback(async () => {
-    const Favobj = {
+  const onClickFavorite = () => {
+    onLikedHandler({
       id,
-      title,
       imageUrl,
       price,
-      isFavorite: !isItemFavorite(id),
-    };
-    postFavoritesItems(Favobj);
-    if (!isFavorites) {
-      toast.success("Добавлено в закладку");
-    } else {
-      toast.success("Удалено из закладки");
-    }
-  }, [id, title, imageUrl, price, isFavorite, postFavoritesItems]);
+      title,
+      parentId: id,
+    });
+  };
 
   return (
     <StyledListItem>
       <ContainerImage>
-        {pathname === "/orders" ? null : isFavorites ? (
+        {pathname === "/orders" ? null : isItemFavorite(id) ? (
           <Liked className="heart" onClick={onClickFavorite} />
         ) : (
           <UnLiked className="heart" onClick={onClickFavorite} />
@@ -71,10 +54,10 @@ export const CardItem = ({ id, imageUrl, price, title, isFavorite }) => {
         </div>
         {pathname === "/orders" ? (
           <Checked />
-        ) : isAdded ? (
-          <Checked onClick={onClickPlus} />
+        ) : isItemAdded(id) ? (
+          <Checked onClick={plusHandler} />
         ) : (
-          <Plus onClick={onClickPlus} />
+          <Plus onClick={plusHandler} />
         )}
       </ContainerPrice>
     </StyledListItem>

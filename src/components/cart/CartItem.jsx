@@ -1,10 +1,11 @@
-import { useContext } from "react";
 import { styled } from "@mui/material";
-import { cartContext } from "../../context/cart-context";
 import { Icons } from "../../assets";
+import { deleteCartThunk } from "../../store/thunks/cartThunk";
+import { useDispatch } from "react-redux";
 
 export const CartItem = ({ id, imageUrl, title, price }) => {
-  const { onRemoveItem } = useContext(cartContext);
+  const dispatch = useDispatch();
+
   return (
     <ListItem>
       <img src={imageUrl} alt="" />
@@ -12,7 +13,10 @@ export const CartItem = ({ id, imageUrl, title, price }) => {
         <p>{title}</p>
         <CartContainerPrice>
           <b>{price} руб.</b>
-          <Icons.Remove className="remove" onClick={() => onRemoveItem(id)} />
+          <Icons.Remove
+            className="remove"
+            onClick={() => dispatch(deleteCartThunk(id))}
+          />
         </CartContainerPrice>
       </WrapperPriceDesc>
     </ListItem>

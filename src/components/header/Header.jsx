@@ -1,16 +1,15 @@
-import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { styled } from "@mui/material";
 import { useToggleModal } from "../../hooks/useToggleModal";
-import { cartContext } from "../../context/cart-context";
 import { Icons, Logo } from "../../assets";
+import { useSelector } from "react-redux";
 
 const { Cart, Heart, User } = Icons;
 
 export const Header = () => {
-  const { totalPrice } = useContext(cartContext);
   const { toggleHandler } = useToggleModal();
   const navigate = useNavigate();
+  const { totalPrice } = useSelector((state) => state.cart);
   return (
     <StyledHeader>
       <div className="wrapper-logo_png" onClick={() => navigate("/")}>

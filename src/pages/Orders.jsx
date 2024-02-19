@@ -2,23 +2,31 @@ import { useNavigate } from "react-router-dom";
 import { styled } from "@mui/material";
 import { CardList } from "../components/card/CardList";
 import { OrdersDate } from "../components/orders/OrdersDate";
-import { useGetRequest } from "../hooks/useGetRequest";
 import { CiCircleChevLeft } from "react-icons/ci";
 
 import { Button } from "../components/UI/Button";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
+import { getAllOrdersThunk } from "../store/thunks/orderThunk";
 
 export const Orders = () => {
-  const [orders] = useGetRequest("orders");
+  const { orders } = useSelector((state) => state.order);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getAllOrdersThunk());
+  }, []);
+
   return (
     <ContainerFavorites>
       <div className="container_title">
         <CiCircleChevLeft className="chevleft" onClick={() => navigate("/")} />
         <h1>Мои покупки</h1>
       </div>
-      {orders.length > 0 ? (
+      {orders?.length > 0 ? (
         <>
-          {orders.map((item) => (
+          {orders?.map((item) => (
             <ListContainer key={item.id}>
               <OrdersDate date={item.date} />
               <CardList items={item.items} />
@@ -46,6 +54,8 @@ export const Orders = () => {
 };
 
 const ContainerFavorites = styled("div")`
+  height: 100%;
+  min-height: 80vh;
   display: flex;
   flex-direction: column;
   gap: 40px;
