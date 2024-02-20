@@ -25,6 +25,7 @@ export const SignUp = () => {
         name: userData.name,
         fullName: userData.fullName,
         email: userData.email,
+        password: userData.password,
       });
       navigate("/");
     },

@@ -3,7 +3,6 @@ import { styled } from "@mui/material";
 import { useToggleModal } from "../../hooks/useToggleModal";
 import { Icons, Logo } from "../../assets";
 import { useSelector } from "react-redux";
-import { MenuHeader } from "./MenuHeader";
 
 const { Cart, Heart, User } = Icons;
 
@@ -31,10 +30,9 @@ export const Header = () => {
             <Heart />
             <b>Закладки</b>
           </li>
-          <li onClick={() => toggleHandler("menu")} id="basic-menu">
+          <li onClick={() => navigate("/orders")} id="basic-menu">
             <User />
             <b>Профиль</b>
-            <MenuHeader />
           </li>
         </ListNav>
       </nav>

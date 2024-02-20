@@ -6,6 +6,9 @@ import { PersistGate } from "redux-persist/integration/react";
 import { AuthProvider } from "./context/auth-context";
 import { Provider } from "react-redux";
 import { persistor, store } from "./store";
+import { injectStore } from "./api/axiosInstance";
+
+injectStore(store);
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <AuthProvider>
