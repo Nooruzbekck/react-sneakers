@@ -8,3 +8,7 @@ export const axiosInstance = axios.create({
     Accept: "Content-Type",
   },
 });
+
+axiosInstance.interceptors.request.use((config) => {
+  return config;
+});

@@ -3,6 +3,7 @@ import { styled } from "@mui/material";
 import { useToggleModal } from "../../hooks/useToggleModal";
 import { Icons, Logo } from "../../assets";
 import { useSelector } from "react-redux";
+import { MenuHeader } from "./MenuHeader";
 
 const { Cart, Heart, User } = Icons;
 
@@ -10,6 +11,7 @@ export const Header = () => {
   const { toggleHandler } = useToggleModal();
   const navigate = useNavigate();
   const { totalPrice } = useSelector((state) => state.cart);
+
   return (
     <StyledHeader>
       <div className="wrapper-logo_png" onClick={() => navigate("/")}>
@@ -29,9 +31,10 @@ export const Header = () => {
             <Heart />
             <b>Закладки</b>
           </li>
-          <li onClick={() => navigate("/orders")}>
+          <li onClick={() => toggleHandler("menu")} id="basic-menu">
             <User />
             <b>Профиль</b>
+            <MenuHeader />
           </li>
         </ListNav>
       </nav>
@@ -76,7 +79,6 @@ const StyledHeader = styled("header")`
     height: 110px;
     padding: 0 40px;
     flex-direction: column;
-    align-items: self-start;
     justify-content: space-around;
     .wrapper-description {
       h1 {
@@ -97,6 +99,7 @@ const ListNav = styled("ul")`
   align-items: center;
   gap: 32px;
   list-style: none;
+
   li {
     display: flex;
     gap: 10px;

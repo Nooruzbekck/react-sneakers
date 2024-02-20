@@ -9,7 +9,7 @@ import { getFavoritesThunk } from "../store/thunks/favoriteThunk";
 export const Home = () => {
   const [searchValue, setSearchValue] = useState("");
   const dispatch = useDispatch();
-  const { items } = useSelector((state) => state.items);
+  const { items = [] } = useSelector((state) => state.items);
 
   useEffect(() => {
     dispatch(getCardItemsThunk());

@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import { signInThunk, signUpThunk } from "../thunks/authThunk";
 
 export const authSlice = createSlice({
-  name: "auht",
+  name: "auth",
   initialState: {
     isLoggedIn: false,
     emailError: null,
@@ -31,3 +31,5 @@ export const authSlice = createSlice({
       });
   },
 });
+
+export const { loginUser } = authSlice.actions;

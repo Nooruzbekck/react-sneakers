@@ -1,13 +1,13 @@
-import { useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { styled } from "@mui/material";
 import { useFormik } from "formik";
 import { AuthInput } from "./AuthInput";
 import { loginValidation } from "../../utils/constants/validation";
-import { authContext } from "../../context/auth-context";
+import { signInThunk } from "../../store/thunks/authThunk";
+import { useDispatch } from "react-redux";
 
 export const SignIn = () => {
-  const { postLoginUserRequest } = useContext(authContext);
+  const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const formik = useFormik({
@@ -17,9 +17,8 @@ export const SignIn = () => {
     },
 
     validationSchema: loginValidation,
-    onSubmit: async (data) => {
-      await postLoginUserRequest(data);
-      navigate("/");
+    onSubmit: (data) => {
+      dispatch(signInThunk({ user: data, navigate }));
     },
   });
 
