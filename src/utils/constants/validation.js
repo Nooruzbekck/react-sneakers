@@ -42,11 +42,13 @@ export const schema = Yup.object().shape({
 
 export const loginValidation = Yup.object().shape({
   email: Yup.string()
+    .required("Обязательное поле")
     .email("Пожалуйста, введите действительный адрес электронной почты")
     .matches(EMAIL_REGX, {
       message: "почта некорректен",
     }),
   password: Yup.string()
+    .required("Обязательное поле")
     .matches(/[0-9]/, "Пароль должен быть надежным")
     .matches(/[a-z]/, "Пароль должен быть надежным"),
 });

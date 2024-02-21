@@ -11,6 +11,7 @@ export const AuthInput = ({
   placeholder,
   error,
   touched,
+  autoComplete = null,
 }) => {
   const [isShowPassword, setIsShowPassword] = useState(false);
   const isPasswordType = type === "password";

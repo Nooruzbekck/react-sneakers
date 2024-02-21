@@ -72,7 +72,7 @@ const ContainerFavorites = styled("div")`
   }
   @media (max-width: 480px) {
     gap: 30px;
-    padding: 30px 40px 25px 40px;
+    padding: 30px 10px 25px 10px;
     h1 {
       font-size: 22px;
       font-weight: 600;

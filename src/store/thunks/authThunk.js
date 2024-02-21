@@ -1,11 +1,13 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { axiosInstance } from "../../api/axiosInstance";
+import { loginUser } from "../slices/auth-slice";
 
 export const signInThunk = createAsyncThunk(
   "auth/signInThunk",
-  async ({ user, navigate }, { rejectWithValue }) => {
+  async ({ user, navigate }, { rejectWithValue, dispatch }) => {
     try {
       const { data } = await axiosInstance.post("/auth", user);
+      dispatch(loginUser(data.token));
       navigate("/");
       return data;
     } catch (error) {

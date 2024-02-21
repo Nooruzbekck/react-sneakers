@@ -2,10 +2,11 @@ import { createSlice } from "@reduxjs/toolkit";
 import { signInThunk, signUpThunk } from "../thunks/authThunk";
 
 export const authSlice = createSlice({
-  name: "auht",
+  name: "auth",
   initialState: {
     isLoggedIn: false,
     emailError: null,
+    token: null,
   },
   reducers: {
     loginUser: (state) => {
@@ -14,7 +15,6 @@ export const authSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-      .addCase(signUpThunk.pending, (state, action) => {})
       .addCase(signUpThunk.fulfilled, (state) => {
         state.isLoggedIn = true;
       })
@@ -22,12 +22,14 @@ export const authSlice = createSlice({
         state.emailError = action.payload;
       });
     builder
-      .addCase(signInThunk.pending, (state, action) => {})
-      .addCase(signInThunk.fulfilled, (state) => {
+      .addCase(signInThunk.fulfilled, (state, action) => {
         state.isLoggedIn = true;
+        state.token = action.payload.token;
       })
       .addCase(signInThunk.rejected, (state, action) => {
         state.emailError = action.payload;
       });
   },
 });
+
+export const { loginUser } = authSlice.actions;

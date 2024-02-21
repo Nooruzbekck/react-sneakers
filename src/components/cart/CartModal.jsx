@@ -15,7 +15,7 @@ export const CartModal = () => {
   const [isOrders, setIsOrders] = useState(false);
   const [dataId, setDataId] = useState(0);
 
-  const { cartItems } = useSelector((state) => state.cart);
+  const { cartItems = [] } = useSelector((state) => state.cart);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -33,7 +33,7 @@ export const CartModal = () => {
   };
 
   return (
-    <Modal open={Boolean(cartIsActive)} onClose={() => toggleHandler("")}>
+    <Modal open={cartIsActive === "open"} onClose={() => toggleHandler("")}>
       <StyledContainer>
         <Basket>
           <CiCircleChevLeft
@@ -78,7 +78,7 @@ const StyledContainer = styled("div")`
 const Basket = styled("div")`
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 20px;
   padding: 32px 0 0 30px;
   .chevleft {
     width: 30px;

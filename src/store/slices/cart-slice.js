@@ -20,9 +20,8 @@ export const cartSlice = createSlice({
           return (acc += item.price);
         }, 0);
       })
-      .addCase(getCartItemsThunk.rejected, (state, action) => {
+      .addCase(getCartItemsThunk.rejected, (state) => {
         state.loading = "отклонено!";
-        state.cartItems = action.payload;
       });
   },
 });

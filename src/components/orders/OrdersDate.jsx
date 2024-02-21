@@ -25,7 +25,7 @@ const StyledDate = styled("div")`
   align-items: center;
   gap: 10px;
   border-radius: 12px;
-  margin-bottom: 10px;
+  margin-bottom: 20px;
   b {
     font-size: 16px;
     font-weight: 400;
