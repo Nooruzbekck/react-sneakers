@@ -1,11 +1,10 @@
 import { styled } from "@mui/material";
 import { CartItem } from "./CartItem";
 import { Button } from "../UI/Button";
-import { useContext } from "react";
-import { cartContext } from "../../context/cart-context";
+import { useSelector } from "react-redux";
 
 export const CartList = ({ cartItems = [], onPostOrders }) => {
-  const { totalPrice } = useContext(cartContext);
+  const { totalPrice } = useSelector((state) => state.cart);
   const totalAmount = (totalPrice / 100) * 5;
   return (
     <ContainerCartList>
@@ -27,7 +26,7 @@ export const CartList = ({ cartItems = [], onPostOrders }) => {
           <div>
             <div></div>
           </div>
-          <b>{totalAmount.toFixed(2)} руб. </b>
+          <b>{totalAmount.toFixed(2)} руб.</b>
         </div>
         <Button variantIcon="right" onClick={onPostOrders}>
           Оформить заказ
@@ -45,7 +44,7 @@ const ContainerCartList = styled("div")`
   gap: 10px;
   justify-content: space-between;
   align-items: center;
-  padding: 0px 30px 32px 30px;
+  padding: 0px 20px 32px 30px;
   ul {
     display: flex;
     flex-direction: column;

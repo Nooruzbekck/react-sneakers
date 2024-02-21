@@ -1,20 +1,20 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import { RouterProvider } from "react-router-dom";
 import "./index.css";
-import { routes } from "./routes/routes";
-import { CartProvider } from "./context/cart-context";
-import { FavoriteProvider } from "./context/favorites-context";
+import { AppRoutes } from "./routes/routes";
+import { PersistGate } from "redux-persist/integration/react";
 import { AuthProvider } from "./context/auth-context";
+import { Provider } from "react-redux";
+import { persistor, store } from "./store";
+import { injectStore } from "./api/axiosInstance";
+
+injectStore(store);
 
 ReactDOM.createRoot(document.getElementById("root")).render(
-  <React.StrictMode>
-    <AuthProvider>
-      <FavoriteProvider>
-        <CartProvider>
-          <RouterProvider router={routes} />
-        </CartProvider>
-      </FavoriteProvider>
-    </AuthProvider>
-  </React.StrictMode>
+  <AuthProvider>
+    <Provider store={store}>
+      <PersistGate loading={null} persistor={persistor} />
+      <AppRoutes />
+    </Provider>
+  </AuthProvider>
 );

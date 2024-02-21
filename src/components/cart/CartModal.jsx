@@ -1,41 +1,39 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Modal, styled } from "@mui/material";
-import axios from "axios";
 import { CartList } from "./CartList";
 import { useToggleModal } from "../../hooks/useToggleModal";
-import { cartContext } from "../../context/cart-context";
 import { InfoOrders } from "./InfoOrders";
 import { CartEmpty } from "./CartEmpty";
 import { BASE_URL } from "../../utils/constants/constants";
 import { CiCircleChevLeft } from "react-icons/ci";
+import { useDispatch, useSelector } from "react-redux";
+import { getCartItemsThunk } from "../../store/thunks/cartThunk";
+import { postOrderThunk } from "../../store/thunks/orderThunk";
 
 export const CartModal = () => {
   const { cartIsActive, toggleHandler } = useToggleModal();
   const [isOrders, setIsOrders] = useState(false);
   const [dataId, setDataId] = useState(0);
-  const { sneakersCart, setSneakersCart } = useContext(cartContext);
+
+  const { cartItems = [] } = useSelector((state) => state.cart);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getCartItemsThunk());
+  }, []);
 
   const handlePostOrders = async () => {
-    try {
-      const { data } = await axios.post(`${BASE_URL}/orders`, {
-        date: new Date(),
-        items: sneakersCart,
-      });
-      setDataId(data.id);
-      const items = data.items;
-      for (const iterator of items) {
-        const itemId = iterator;
-        await axios.delete(`${BASE_URL}/cart/${itemId.id}`);
-      }
-      setSneakersCart([]);
-      setIsOrders(true);
-    } catch (error) {
-      console.log(error);
-    }
+    const newOrders = {
+      date: new Date(),
+      items: cartItems,
+    };
+
+    dispatch(postOrderThunk({ newOrders, setDataId }));
+    setIsOrders(true);
   };
 
   return (
-    <Modal open={Boolean(cartIsActive)} onClose={() => toggleHandler("")}>
+    <Modal open={cartIsActive === "open"} onClose={() => toggleHandler("")}>
       <StyledContainer>
         <Basket>
           <CiCircleChevLeft
@@ -48,10 +46,10 @@ export const CartModal = () => {
           <InfoOrders dataId={dataId} setIsOrders={setIsOrders} />
         ) : (
           <>
-            {sneakersCart.length > 0 ? (
+            {cartItems.length > 0 ? (
               <>
                 <CartList
-                  cartItems={sneakersCart}
+                  cartItems={cartItems}
                   onPostOrders={handlePostOrders}
                 />
               </>
@@ -80,7 +78,7 @@ const StyledContainer = styled("div")`
 const Basket = styled("div")`
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 20px;
   padding: 32px 0 0 30px;
   .chevleft {
     width: 30px;

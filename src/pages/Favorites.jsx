@@ -1,14 +1,25 @@
-import React, { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { styled } from "@mui/material";
-import { favoritesContext } from "../context/favorites-context";
 import { CardList } from "../components/card/CardList";
 import { Button } from "../components/UI/Button";
 import { CiCircleChevLeft } from "react-icons/ci";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
+import { getFavoritesThunk } from "../store/thunks/favoriteThunk";
 
 export const Favorites = () => {
-  const { favorites } = useContext(favoritesContext);
+  const { favorites } = useSelector((state) => state.favorites);
+
+  const dispatch = useDispatch();
   const navigate = useNavigate();
+  useEffect(() => {
+    dispatch(getFavoritesThunk());
+  }, [dispatch]);
+
+  const transformedData = favorites.reduce((acc, item) => {
+    return [...acc, { ...item, id: item.parentId }];
+  }, []);
+
   return (
     <ContainerFavorites>
       <div>
@@ -16,7 +27,7 @@ export const Favorites = () => {
         <h1>Мои закладки</h1>
       </div>
       {favorites.length > 0 ? (
-        <CardList items={favorites} />
+        <CardList items={transformedData} />
       ) : (
         <FavoritesEmpty>
           <img
@@ -37,7 +48,8 @@ export const Favorites = () => {
 };
 
 const ContainerFavorites = styled("div")`
-  height: 100vh;
+  height: 100%;
+  min-height: 80vh;
   display: flex;
   flex-direction: column;
   gap: 40px;
@@ -55,7 +67,7 @@ const ContainerFavorites = styled("div")`
   }
   @media (max-width: 480px) {
     gap: 30px;
-    padding: 30px 40px 25px 40px;
+    padding: 30px 10px 25px 10px;
     h1 {
       font-size: 22px;
       font-weight: 600;
