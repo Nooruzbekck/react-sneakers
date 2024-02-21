@@ -83,18 +83,14 @@ const StyledListItem = styled("li")`
   }
 
   @media (max-width: 480px) {
-    width: 150px;
-    height: 180px;
+    width: 48.5%;
+    height: 215px;
     padding: 15px;
     border-radius: 28px;
     overflow: hidden;
     svg {
       width: 25px;
     }
-  }
-  @media (max-width: 400px) {
-    width: 48.5%;
-    height: 185px;
   }
 `;
 
@@ -106,21 +102,21 @@ const ContainerImage = styled("div")`
     left: 0;
   }
   img {
+    object-fit: cover;
     width: 100%;
     height: 112px;
-    object-fit: cover;
   }
 
   @media (max-width: 480px) {
-    height: 85px;
+    width: 140px;
+    height: 102px;
     img {
       width: 100%;
-      height: 82px;
-      object-fit: contain;
+      height: 100%;
     }
     .heart {
-      top: -3px;
-      left: 4px;
+      width: 32px;
+      height: 32px;
     }
   }
 `;
@@ -137,9 +133,9 @@ const Description = styled("p")`
   margin-top: 10px;
   @media (max-width: 480px) {
     width: 100px;
-    font-size: 10px;
-    font-weight: 200;
-    margin-top: 0;
+    height: 30px;
+    font-size: 11px;
+    font-weight: 300;
   }
 `;
 
@@ -167,12 +163,16 @@ const ContainerPrice = styled("div")`
   @media (max-width: 480px) {
     transform: translateY(10px);
     span {
-      font-size: 9px;
+      font-size: 11px;
       font-weight: 300;
     }
     b {
-      font-size: 11px;
-      font-weight: 500;
+      font-size: 12px;
+      font-weight: 600;
+    }
+    svg {
+      width: 32px;
+      height: 32px;
     }
   }
 `;

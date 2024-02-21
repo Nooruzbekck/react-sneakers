@@ -78,7 +78,7 @@ const StyledContainer = styled("div")`
 const Basket = styled("div")`
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 20px;
   padding: 32px 0 0 30px;
   .chevleft {
     width: 30px;

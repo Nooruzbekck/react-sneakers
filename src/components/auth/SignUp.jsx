@@ -96,6 +96,7 @@ export const SignUp = () => {
 
 const StyledRegisterContainer = styled("div")`
   width: 38%;
+  min-width: 340px;
   height: 500px;
   padding: 25px 50px;
   border-radius: 24px;
@@ -116,6 +117,12 @@ const StyledRegisterContainer = styled("div")`
     h1 {
       font-size: 28px;
       font-weight: 400;
+    }
+    @media (max-width: 480px) {
+      h1 {
+        font-size: 24px;
+        font-weight: 400;
+      }
     }
   }
 `;
@@ -145,6 +152,10 @@ const Question = styled("p")`
   font-size: 16px;
   font-weight: 400;
   color: #23262f;
+  @media (max-width: 480px) {
+    font-size: 14px;
+    font-weight: 400;
+  }
   a {
     color: #3772ff;
     text-decoration: none;

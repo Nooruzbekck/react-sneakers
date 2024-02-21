@@ -57,14 +57,14 @@ const AllSneakers = styled("div")`
     font-weight: 700;
   }
   @media (max-width: 480px) {
-    padding: 30px 40px 25px 40px;
+    padding: 30px 10px 25px 10px;
     .input_title {
       flex-direction: column;
       gap: 10px;
-    }
-    h1 {
-      font-size: 22px;
-      font-weight: 600;
+      h1 {
+        font-size: 22px;
+        font-weight: 600;
+      }
     }
   }
 `;

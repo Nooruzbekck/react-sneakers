@@ -78,6 +78,7 @@ const StyledHeader = styled("header")`
     padding: 0 40px;
     flex-direction: column;
     justify-content: space-around;
+    align-items: start;
     .wrapper-description {
       h1 {
         font-size: 16px;
@@ -120,7 +121,7 @@ const ListNav = styled("ul")`
     gap: 25px;
     justify-content: space-between;
     b {
-      font-size: 14px;
+      font-size: 15px;
       font-weight: 400;
     }
     .price {

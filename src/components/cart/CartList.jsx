@@ -44,7 +44,7 @@ const ContainerCartList = styled("div")`
   gap: 10px;
   justify-content: space-between;
   align-items: center;
-  padding: 0px 30px 32px 30px;
+  padding: 0px 20px 32px 30px;
   ul {
     display: flex;
     flex-direction: column;

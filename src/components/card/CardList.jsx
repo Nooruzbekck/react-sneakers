@@ -59,13 +59,12 @@ export const CardList = ({ items = [] }) => {
 const CardListContainer = styled("ul")`
   max-width: 100%;
   display: flex;
-  justify-content: space-between;
   flex-wrap: wrap;
   gap: 40px 18px;
   @media (max-width: 480px) {
     justify-content: space-between;
   }
   @media (max-width: 400px) {
-    gap: 20px 6px;
+    gap: 20px 10px;
   }
 `;

@@ -51,13 +51,15 @@ export const SignIn = () => {
       </Form>
       <Link to="/forgot-password">Забыли пароль?</Link>
       <Question>
-        Нет аккаунта? <Link to="/register">Зарегистрироваться</Link>
+        Нет аккаунта?
+        <Link to="/register">Зарегистрироваться</Link>
       </Question>
     </StyledSigInContainer>
   );
 };
 const StyledSigInContainer = styled("div")`
   width: 38%;
+  min-width: 330px;
   height: 350px;
   padding: 25px 50px;
   border-radius: 24px;
@@ -85,6 +87,15 @@ const StyledSigInContainer = styled("div")`
   a {
     color: #3772ff;
     text-decoration: none;
+  }
+  @media (max-width: 480px) {
+    position: relative;
+    div {
+      h1 {
+        font-size: 24px;
+        font-weight: 400;
+      }
+    }
   }
 `;
 
@@ -114,6 +125,13 @@ const Question = styled("p")`
   font-size: 16px;
   font-weight: 400;
   color: #23262f;
+  @media (max-width: 480px) {
+    font-size: 14px;
+    font-weight: 400;
+    position: absolute;
+    bottom: 30px;
+    left: 40px;
+  }
 
   a {
     color: #3772ff;
